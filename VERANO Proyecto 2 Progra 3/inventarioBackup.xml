@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<inventario>
+	<categoria ID="ALR">
+		<nombre>Abrasivos, limas y rebabeadores</nombre>
+		<descripcion>herramienta o una sustancia que, al combinarse con un esfuerzo mecánico, actúa sobre otros
+			materiales o superficies para modificar su acabado a través del desgaste
+		</descripcion>
+		<listasubcategoria>
+			<subcategoria ID="ADH">
+				<nombre>Adhesivos</nombre>
+				<descripcion>pegan mucho</descripcion>
+				<listado>
+					<articulo ID="10001">
+						<marca>Loctite</marca>
+						<nombre>Super Adhesivo</nombre>
+						<Descripcion>Super Adhesivo 495</Descripcion>
+						<presentaciones>
+							<presentacion id="1">
+								<unidad>ml</unidad>
+								<cantidad>25</cantidad>
+							</presentacion>
+							<presentacion id="2">
+								<unidad>ml</unidad>
+								<cantidad>35</cantidad>
+							</presentacion>
+						</presentaciones>
+					</articulo>
+					<articulo ID="10002">
+						<marca>Loctite</marca>
+						<nombre>Adhesivo Prisma</nombre>
+						<Descripcion>Adhesivo Prisma 401</Descripcion>
+						<presentaciones>
+							<presentacion id="1">
+								<unidad>ml</unidad>
+								<cantidad>75</cantidad>
+							</presentacion>
+							<presentacion id="2">
+								<unidad>ml</unidad>
+								<cantidad>175</cantidad>
+							</presentacion>
+						</presentaciones>
+					</articulo>
+				</listado>
+			</subcategoria>
+			<subcategoria ID="ATC">
+				<nombre>Anticorrosivos</nombre>
+				<descripcion>corroen mucho </descripcion>
+				<listado>
+					<articulo ID="10003">
+						<marca>Loctite</marca>
+						<nombre>Anticorrosivo Maxicoat</nombre>
+						<Descripcion>Anticorrosivo Maxicoat 9660</Descripcion>
+						<presentaciones>
+							<presentacion id="1">
+								<unidad>ml</unidad>
+								<cantidad>250</cantidad>
+							</presentacion>
+							<presentacion id="2">
+								<unidad>gl</unidad>
+								<cantidad>0.5</cantidad>
+							</presentacion>
+							<presentacion id="3">
+								<unidad>gl</unidad>
+								<cantidad>1</cantidad>
+							</presentacion>
+						</presentaciones>
+					</articulo>
+				</listado>
+			</subcategoria>
+			<subcategoria ID="SLC">
+				<nombre>Silicones</nombre>
+				<descripcion>no se si pegan mas que el otro</descripcion>
+				<listado>
+					<articulo ID="10004">
+						<marca>Loctite</marca>
+						<nombre>Silicon Alta Temperatura</nombre>
+						<Descripcion>Silicon Alta Temperatura 32394</Descripcion>
+						<presentaciones>
+							<presentacion id="1">
+								<unidad>gr</unidad>
+								<cantidad>375</cantidad>
+							</presentacion>
+						</presentaciones>
+					</articulo>
+				</listado>
+			</subcategoria>
+		</listasubcategoria>
+	</categoria>
+	<categoria ID="HEL">
+		<nombre>Herramienta eléctrica</nombre>
+		<descripcion>aparatos accionados por una fuente de energía que generan movimiento o rotación y normalmente están       diseñadas para trabajos prolongado     </descripcion>
+		<listasubcategoria>
+			<subcategoria ID="ALA">
+				<nombre>Alambrica</nombre>
+				<descripcion/>
+				<listado>
+					<articulo ID="20001">
+						<marca>Dewalt</marca>
+						<nombre>Esmeriladora</nombre>
+						<Descripcion>• Construcción robusta para una gran durabilidad. • Sus engranes son metálicos. •
+							Manerales ergonómicos de gran confort. • Protección al sobrecalentamiento.
+						</Descripcion>
+						<presentaciones>
+							<presentacion id="1">
+								<unidad>pulgada</unidad>
+								<cantidad>4 1/2</cantidad>
+							</presentacion>
+							<presentacion id="2">
+								<unidad>pulgada</unidad>
+								<cantidad>5</cantidad>
+							</presentacion>
+							<presentacion id="3">
+								<unidad>pulgada</unidad>
+								<cantidad>7</cantidad>
+							</presentacion>
+							<presentacion id="4">
+								<unidad>pulgada</unidad>
+								<cantidad>9</cantidad>
+							</presentacion>
+						</presentaciones>
+					</articulo>
+				</listado>
+			</subcategoria>
+			<subcategoria ID="INA">
+				<nombre>Inalambrica</nombre>
+				<descripcion/>
+				<listado>
+					<articulo ID="20002">
+						<marca>Makita</marca>
+						<nombre>Taladro</nombre>
+						<Descripcion>• Broquero de cierre rápido. • Empuñadura ergonómica. • Sistema LED de iluminación. •
+							Circuito de protección de batería.
+						</Descripcion>
+						<presentaciones>
+							<presentacion id="1">
+								<unidad>pulgada</unidad>
+								<cantidad>3/8</cantidad>
+							</presentacion>
+							<presentacion id="2">
+								<unidad>pulgada</unidad>
+								<cantidad>1/2</cantidad>
+							</presentacion>
+						</presentaciones>
+					</articulo>
+				</listado>
+			</subcategoria>
+		</listasubcategoria>
+	</categoria>
+	<categoria ID="HNE">
+		<nombre>Herramienta neumática</nombre>
+		<descripcion>herramienta pum</descripcion>
+		<listasubcategoria>
+			<subcategoria ID="ESM">
+				<nombre>Esmeriladora</nombre>
+				<descripcion/>
+				<listado>
+					<articulo ID="30001">
+						<marca>BOSH</marca>
+						<nombre>Esmeriladora Angular Neumatica</nombre>
+						<Descripcion>Esmeriladora Angular Neumatica</Descripcion>
+						<presentaciones>
+							<presentacion id="1234">
+								<unidad>pulgada</unidad>
+								<cantidad>4 1/2</cantidad>
+							</presentacion>
+						</presentaciones>
+					</articulo>
+				</listado>
+			</subcategoria>
+			<subcategoria ID="ACC">
+				<nombre>Accesorios</nombre>
+				<descripcion>Accesorios varios para herramienta neumática</descripcion>
+				<listado>
+					<articulo ID="30002">
+						<marca>ColorConnex</marca>
+						<nombre>Cople y conector para manguera</nombre>
+						<Descripcion/>
+						<presentaciones>
+							<presentacion id="44">
+								<unidad>pulgada</unidad>
+								<cantidad>1/2</cantidad>
+							</presentacion>
+							<presentacion id="45">
+								<unidad>pulgada</unidad>
+								<cantidad>3/4</cantidad>
+							</presentacion>
+						</presentaciones>
+					</articulo>
+				</listado>
+			</subcategoria>
+			<subcategoria ID="MAN">
+				<nombre>Manguera de Neopreno con conectores</nombre>
+				<descripcion>• Con coples machos. • Resisten Aceites, Gasolina, Grasa y Solventes. • Reforzadas con cuerdas
+					de Rayón trenzadas para agregar resistencia. • Muy flexibles y resistentes en ambientes abrasivos o
+					corrosivos.
+				</descripcion>
+				<listado>
+					<articulo ID="400000">
+						<marca>Coleman</marca>
+						<nombre>Manguera 12 pies</nombre>
+						<Descripcion>Manguera de neopreno 12 pies de largo Conector macho y hembra</Descripcion>
+						<presentaciones>
+							<presentacion id="23">
+								<unidad>pulgada</unidad>
+								<cantidad>1/4</cantidad>
+							</presentacion>
+							<presentacion id="65">
+								<unidad>pulgada</unidad>
+								<cantidad>1/2</cantidad>
+							</presentacion>
+							<presentacion id="89">
+								<unidad>pulgada</unidad>
+								<cantidad>3/8</cantidad>
+							</presentacion>
+						</presentaciones>
+					</articulo>
+				</listado>
+			</subcategoria>
+		</listasubcategoria>
+	</categoria>
+</inventario>
