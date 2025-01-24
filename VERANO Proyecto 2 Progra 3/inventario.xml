@@ -16,15 +16,15 @@
             <Descripcion>Super Adhesivo 495</Descripcion>
             <presentaciones>
               <presentacion id="1">
-                <unidad>ml</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>25</cantidad>
               </presentacion>
               <presentacion id="2">
-                <unidad>ml</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>35</cantidad>
               </presentacion>
               <presentacion id="333">
-                <unidad>op</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>90</cantidad>
               </presentacion>
             </presentaciones>
@@ -35,11 +35,11 @@
             <Descripcion>Adhesivo Prisma 401</Descripcion>
             <presentaciones>
               <presentacion id="1">
-                <unidad>ml</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>75</cantidad>
               </presentacion>
               <presentacion id="2">
-                <unidad>ml</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>175</cantidad>
               </presentacion>
             </presentaciones>
@@ -56,15 +56,15 @@
             <Descripcion>Anticorrosivo Maxicoat 9660</Descripcion>
             <presentaciones>
               <presentacion id="1">
-                <unidad>ml</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>250</cantidad>
               </presentacion>
               <presentacion id="2">
-                <unidad>gl</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>0.5</cantidad>
               </presentacion>
               <presentacion id="3">
-                <unidad>gl</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>1</cantidad>
               </presentacion>
             </presentaciones>
@@ -81,7 +81,7 @@
             <Descripcion>Silicon Alta Temperatura 32394</Descripcion>
             <presentaciones>
               <presentacion id="1">
-                <unidad>gr</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>375</cantidad>
               </presentacion>
             </presentaciones>
@@ -106,19 +106,19 @@
             </Descripcion>
             <presentaciones>
               <presentacion id="1">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>4 1/2</cantidad>
               </presentacion>
               <presentacion id="2">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>5</cantidad>
               </presentacion>
               <presentacion id="3">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>7</cantidad>
               </presentacion>
               <presentacion id="4">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>9</cantidad>
               </presentacion>
             </presentaciones>
@@ -137,11 +137,11 @@
             </Descripcion>
             <presentaciones>
               <presentacion id="1">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>3/8</cantidad>
               </presentacion>
               <presentacion id="2">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>1/2</cantidad>
               </presentacion>
             </presentaciones>
@@ -164,7 +164,7 @@
             <Descripcion>Esmeriladora Angular Neumatica</Descripcion>
             <presentaciones>
               <presentacion id="1234">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>4 1/2</cantidad>
               </presentacion>
             </presentaciones>
@@ -181,11 +181,11 @@
             <Descripcion/>
             <presentaciones>
               <presentacion id="44">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>1/2</cantidad>
               </presentacion>
               <presentacion id="45">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>3/4</cantidad>
               </presentacion>
             </presentaciones>
@@ -205,15 +205,15 @@
             <Descripcion>Manguera de neopreno 12 pies de largo Conector macho y hembra</Descripcion>
             <presentaciones>
               <presentacion id="23">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>1/4</cantidad>
               </presentacion>
               <presentacion id="65">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>1/2</cantidad>
               </presentacion>
               <presentacion id="89">
-                <unidad>pulgada</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>3/8</cantidad>
               </presentacion>
             </presentaciones>
@@ -242,11 +242,11 @@
             <Descripcion>44</Descripcion>
             <presentaciones>
               <presentacion id="2">
-                <unidad>3</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>43</cantidad>
               </presentacion>
               <presentacion id="6">
-                <unidad>5</unidad>
+                <unidad>Mililitro</unidad>
                 <cantidad>778888</cantidad>
               </presentacion>
             </presentaciones>

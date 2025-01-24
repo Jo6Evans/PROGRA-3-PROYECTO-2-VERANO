@@ -176,16 +176,13 @@ public class Controller {
     //UNIDADES COMBOBOX
 
 
-     public void llenarComboBoxUnidades(JComboBox<Unidad> comboBox) {
-       // List<Unidad> unidades = service.getCategorias();
-       List<Unidad> unidades = model.getUnidades();
+    public void llenarComboBoxUnidades(JComboBox<Unidad> comboBox) {
+        List<Unidad> unidades = model.getUnidades();
         comboBox.removeAllItems();
         for (Unidad unidad : unidades) {
             comboBox.addItem(unidad);
-            System.out.println("Se añadio");
         }
     }
-
     //============================================================================================================
 
 }

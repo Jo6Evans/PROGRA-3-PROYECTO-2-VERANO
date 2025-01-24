@@ -13,7 +13,6 @@ public class Inventario {
     public Inventario() {
         categorias = new ArrayList<>();
         unidades = new ArrayList<>();
-
     }
 
     public void setUnidades(List<Unidad> unidades) {
@@ -27,9 +26,8 @@ public class Inventario {
 
     public void LoadXML() {
         ReadXMLFile xmlPersistent = new ReadXMLFile();
-        xmlPersistent.cargarCategorias();
         categorias = xmlPersistent.cargarCategorias();
-        xmlPersistent.cargarUnidades();
+        unidades = xmlPersistent.cargarUnidades();
     }
 
     private boolean categoriaExiste(String codigo) {

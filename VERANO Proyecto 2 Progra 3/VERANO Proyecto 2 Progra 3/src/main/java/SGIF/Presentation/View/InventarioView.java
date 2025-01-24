@@ -121,9 +121,19 @@ public class InventarioView {
         PresentacionEliminarButton.setEnabled(false);
         PresentacionEditarButton.setEnabled(false);
         PresentacionLimpiarButton.setEnabled(false);
-        PresentacionUnidadTxtField.setEnabled(false);
+        PresentacionUnidadComboBox.setEnabled(false);
         presentacionguardarTodoButton.setEnabled(false);
         controller.llenarComboBoxUnidades(PresentacionUnidadComboBox);
+
+        PresentacionUnidadComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    PresentacionUnidadComboBox.getSelectedItem();
+                    System.out.println("Categoría seleccionada: " + PresentacionUnidadComboBox.getSelectedItem().toString());
+                }
+            }
+        });
 
         listadoCategoria.setModel(controller.getModelCategorias());
         listadoCategoria.addMouseListener(new MouseAdapter() {
@@ -140,7 +150,7 @@ public class InventarioView {
                     mostrarDatosCategoria(categoria);
                     tabbedPane.setEnabledAt(1, true);
                 } else {
-                    System.out.println(" ");
+                    System.out.println("c");
                 }
             }
         });
@@ -162,7 +172,7 @@ public class InventarioView {
                         mostrarDatosSubCategoria(subCategoria);
                         tabbedPane.setEnabledAt(2, true);
                     } else {
-                        System.out.println(" ");
+                        System.out.println("s");
                     }
                 }
             }
@@ -183,7 +193,7 @@ public class InventarioView {
                     mostrarDatosArticulo(articulo);
                     prenderPresentacionesTodo();
                 } else {
-                    System.out.println(" ");
+                    System.out.println("a");
                 }
             }
         });
@@ -198,7 +208,7 @@ public class InventarioView {
                     PresentacionIDTxtField.setEnabled(false);
                     mostrarDatosPresentacion(presentacion);
                 } else {
-                    System.out.println(" ");
+                    System.out.println("p");
                 }
             }
         });
@@ -252,10 +262,9 @@ public class InventarioView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PresentacionIDTxtField.setEnabled(true);
-                PresentacionUnidadTxtField.setText("");
                 PresentacionIDTxtField.setText("");
                 PresentacioncapacidadCantidadTxtField.setText("");
-                //PresentacionBuscarUnidadTxtField.setText("");
+                PresentacionUnidadComboBox.setSelectedItem(PresentacionUnidadComboBox.getItemAt(0));
                 PresentacionIDBuscarTxtField.setText("");
             }
         });
@@ -767,21 +776,6 @@ public class InventarioView {
             }
         });
 
-
-        /*PresentacionUnidadComboBox.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                Unidad selectedUnidad = (Unidad) PresentacionUnidadComboBox.getSelectedItem();
-
-                // Verificar que se ha seleccionado una categoría
-                if (selectedUnidad != null) {
-                    // Mostrar el código de la categoría en el TextField
-                    IDCattextField.setText(selectedCategoria.getCodigo());
-                    System.out.println("Categoría seleccionada: " + selectedCategoria.toString() + ", Código: " + selectedCategoria.getCodigo());
-                }
-            }
-        });*/
-
         PresentacionBuscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -859,12 +853,10 @@ public class InventarioView {
         PresentacioncapacidadCantidadTxtField.setEnabled(false);
         PresentacionEditarButton.setEnabled(false);
         PresentacionLimpiarButton.setEnabled(false);
-        PresentacionUnidadTxtField.setEnabled(false);
         presentacionguardarTodoButton.setEnabled(false);
         PresentacionEliminarButton.setEnabled(false);
         PresentacionBuscarButton.setEnabled(false);
         PresentacionIDBuscarTxtField.setEnabled(false);
-        PresentacionBuscarUnidadLabel.setEnabled(false);
         PresentacionIDBuscarLabel.setEnabled(false);
         PresentacionUnidadComboBox.setEnabled(false);
         PresentacionIDLabel.setEnabled(false);
@@ -879,12 +871,10 @@ public class InventarioView {
         PresentacioncapacidadCantidadTxtField.setEnabled(true);
         PresentacionEditarButton.setEnabled(true);
         PresentacionLimpiarButton.setEnabled(true);
-        PresentacionUnidadTxtField.setEnabled(true);
         PresentacionEliminarButton.setEnabled(true);
         PresentacionBuscarButton.setEnabled(true);
         PresentacionIDBuscarTxtField.setEnabled(true);
         PresentacionIDLabel.setEnabled(true);
-        PresentacionBuscarUnidadLabel.setEnabled(true);
         PresentacionIDBuscarLabel.setEnabled(true);
         PresentacionUnidadComboBox.setEnabled(true);
         presentacionguardarTodoButton.setEnabled(true);
@@ -917,7 +907,7 @@ public class InventarioView {
     private void mostrarDatosPresentacion(Presentacion p) {
         PresentacionIDTxtField.setText(p.getId());
         PresentacioncapacidadCantidadTxtField.setText(p.getCantidad());
-        PresentacionUnidadTxtField.setText(p.getUnidad());
+        PresentacionUnidadComboBox.setSelectedItem(p.getUnidad());
     }
 
     public JPanel getMainpanel() {
