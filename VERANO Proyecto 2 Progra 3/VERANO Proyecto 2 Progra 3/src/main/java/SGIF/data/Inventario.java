@@ -1,10 +1,6 @@
 package SGIF.data;
 
-import SGIF.logic.Articulo;
-import SGIF.logic.Categoria;
-import SGIF.logic.Presentacion;
-import SGIF.logic.SubCategoria;
-import jdk.jshell.ExpressionSnippet;
+import SGIF.logic.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,16 +8,28 @@ import java.util.List;
 public class Inventario {
 
     private List<Categoria> categorias;
+    private List<Unidad> unidades;
 
     public Inventario() {
         categorias = new ArrayList<>();
+        unidades = new ArrayList<>();
 
+    }
+
+    public void setUnidades(List<Unidad> unidades) {
+        this.unidades = unidades;
+    }
+
+    public List<Unidad> getUnidades() {
+        System.out.println();
+        return unidades;
     }
 
     public void LoadXML() {
         ReadXMLFile xmlPersistent = new ReadXMLFile();
         xmlPersistent.cargarCategorias();
         categorias = xmlPersistent.cargarCategorias();
+        xmlPersistent.cargarUnidades();
     }
 
     private boolean categoriaExiste(String codigo) {

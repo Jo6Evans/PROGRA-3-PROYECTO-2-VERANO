@@ -1,10 +1,7 @@
 package SGIF.Presentation.Model;
 
 import SGIF.data.Inventario;
-import SGIF.logic.Articulo;
-import SGIF.logic.Categoria;
-import SGIF.logic.Presentacion;
-import SGIF.logic.SubCategoria;
+import SGIF.logic.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,10 +13,12 @@ public class Model {
     private List<SubCategoria> subcategorias;
     private List<Articulo> articulos;
     private List<Presentacion> presentaciones;
+    private String unidades;
     private ArticuloTableModel articuloTableModel;
     private CategoriaTableModel categoriaTableModel;
     private PresentacionTableModel presentacionTableModel;
     private SubCategoriaTableModel subCategoriaTableModel;
+
     public void cargarArchivo() {
         data.LoadXML();
     }
@@ -65,6 +64,14 @@ public class Model {
     public void setPresentaciones(List<Presentacion> presentaciones) {
         this.presentaciones = presentaciones;
 
+    }
+
+    public void setUnidades(List<Unidad> unidades) {
+        data.setUnidades(unidades);
+    }
+
+    public List<Unidad> getUnidades() {
+        return data.getUnidades();
     }
 
     public List<Articulo> cargarArticulos(SubCategoria subcategoriaSeleccionada) {

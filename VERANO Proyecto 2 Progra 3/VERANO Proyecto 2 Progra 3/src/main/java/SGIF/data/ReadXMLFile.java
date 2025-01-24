@@ -1,16 +1,12 @@
 package SGIF.data;
 
-import SGIF.logic.Articulo;
-import SGIF.logic.Categoria;
-import SGIF.logic.Presentacion;
-import SGIF.logic.SubCategoria;
+import SGIF.logic.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import javax.swing.text.html.parser.Parser;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -119,7 +115,7 @@ public class ReadXMLFile {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             // initialize StreamResult with File object to save to file
-            StreamResult result = new StreamResult(new File("VERANO Proyecto 1 Progra 3/inventario.xml"));
+            StreamResult result = new StreamResult(new File("inventario.xml"));
             DOMSource source = new DOMSource(doc);
             transformer.transform(source, result);
         } catch (ParserConfigurationException | TransformerException ex) {
@@ -136,7 +132,7 @@ public class ReadXMLFile {
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true); //quiero que verifique que el xml solo tenga cosas del xml y que la estructura este sana, un doc correcto
             // parse XML file
             DocumentBuilder db = dbf.newDocumentBuilder(); //documento donde voy a trabajar para el builder, intenta trasnform xml a memoria
-            Document doc = db.parse(new File("VERANO Proyecto 1 Progra 3/inventario.xml")); //hace parseo de un doc, se le pasa la ruta del doc, parse para leer yy transformar, devuelve un documento listo
+            Document doc = db.parse(new File("inventario.xml")); //hace parseo de un doc, se le pasa la ruta del doc, parse para leer yy transformar, devuelve un documento listo
             // optional, but recommended
             // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize(); //chequea si estructura correcta ttodo estandar de un xml, normalizar y leer correctamente
@@ -199,4 +195,76 @@ public class ReadXMLFile {
         }
         return l;
     }
+
+  /* public void cargarUnidades() {
+        List<Unidad> listUnidades = new ArrayList<>();
+
+       try {
+       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+       factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+       DocumentBuilder builder = factory.newDocumentBuilder();
+       Document document = builder.parse(new File("VERANO Proyecto 2 Progra 3/unidades.xml"));
+       document.getDocumentElement().normalize();
+
+        NodeList unidadesList  = document.getElementsByTagName("unidades");
+        for(int i =0; i < unidadesList .getLength(); i++){
+
+            Node nodeU = unidadesList .item(i);
+            if(nodeU.getNodeType()==Node.ELEMENT_NODE){
+
+                Element unidadElement = (Element) nodeU;
+                Unidad unidad = new Unidad(unidadElement.getElementsByTagName("unidad").item(0).getTextContent());
+                listUnidades.add(unidad);
+                System.out.println("Unidad cargada" + unidad);
+            }
+        }
+
+        Inventario datos = new Inventario();
+        datos.setUnidades(listUnidades);
+       } catch (ParserConfigurationException | SAXException | IOException e) {
+           e.printStackTrace();
+       }
+    }*/
+  public List<Unidad> cargarUnidades() {
+      List<Unidad> unidades = new ArrayList<>();
+      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+      try {
+          // Configuración para evitar vulnerabilidades (XML External Entities - XXE)
+          dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+          // Crear el DocumentBuilder y parsear el archivo XML
+          DocumentBuilder db = dbf.newDocumentBuilder();
+          Document doc = db.parse(new File("VERANO Proyecto 2 Progra 3/unidades.xml"));
+
+          // Normalizar la estructura del documento XML
+          doc.getDocumentElement().normalize();
+
+          // Obtener todos los nodos llamados "unidad"
+          NodeList nodeList = doc.getElementsByTagName("unidad");
+
+          for (int i = 0; i < nodeList.getLength(); i++) {
+              Node node = nodeList.item(i);
+              if (node.getNodeType() == Node.ELEMENT_NODE) {
+                  // Extraer el texto de la etiqueta <unidad>
+                  String unidadNombre = node.getTextContent();
+                  // Crear un nuevo objeto Unidad y agregarlo a la lista
+                  Unidad unidad = new Unidad(unidadNombre);
+
+                  if (!unidades.contains(unidad)) {
+                      unidades.add(unidad);
+                  }
+
+                  unidades.add(unidad);
+                  System.out.println("Unidad cargada" + unidadNombre);
+              }
+          }
+      } catch (ParserConfigurationException | SAXException | IOException e) {
+          // Manejar excepciones si hay problemas en el parseo
+          e.printStackTrace();
+      }
+
+      return unidades;
+  }
+
 }

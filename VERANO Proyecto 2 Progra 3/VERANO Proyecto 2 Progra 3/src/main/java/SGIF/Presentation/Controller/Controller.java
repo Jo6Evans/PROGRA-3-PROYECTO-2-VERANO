@@ -3,12 +3,10 @@ package SGIF.Presentation.Controller;
 import SGIF.Presentation.Model.*;
 import SGIF.Presentation.View.InventarioView;
 import SGIF.Presentation.View.InventarioView;
-import SGIF.logic.Articulo;
-import SGIF.logic.Categoria;
-import SGIF.logic.Presentacion;
-import SGIF.logic.SubCategoria;
+import SGIF.logic.*;
 import jdk.jshell.ExpressionSnippet;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -175,6 +173,18 @@ public class Controller {
     //============================================================================================================
     //============================================================================================================
 
+    //UNIDADES COMBOBOX
+
+
+     public void llenarComboBoxUnidades(JComboBox<Unidad> comboBox) {
+       // List<Unidad> unidades = service.getCategorias();
+       List<Unidad> unidades = model.getUnidades();
+        comboBox.removeAllItems();
+        for (Unidad unidad : unidades) {
+            comboBox.addItem(unidad);
+            System.out.println("Se añadio");
+        }
+    }
 
     //============================================================================================================
 

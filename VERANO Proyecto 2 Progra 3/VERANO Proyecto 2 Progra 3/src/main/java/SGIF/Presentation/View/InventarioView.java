@@ -5,23 +5,15 @@ import SGIF.Presentation.Model.ArticuloTableModel;
 import SGIF.Presentation.Model.CategoriaTableModel;
 import SGIF.Presentation.Model.PresentacionTableModel;
 import SGIF.Presentation.Model.SubCategoriaTableModel;
-import SGIF.logic.Articulo;
-import SGIF.logic.Categoria;
-import SGIF.logic.Presentacion;
-import SGIF.logic.SubCategoria;
+import SGIF.logic.*;
 
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.JFrame;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class InventarioView {
 
@@ -112,6 +104,7 @@ public class InventarioView {
     private JButton PresentacionBuscarButton;
     private JLabel PresentacionBuscarUnidadLabel;
     private JTextField PresentacionBuscarUnidadTxtField;
+    private JComboBox PresentacionUnidadComboBox;
 
     private Controller controller;
 
@@ -130,7 +123,7 @@ public class InventarioView {
         PresentacionLimpiarButton.setEnabled(false);
         PresentacionUnidadTxtField.setEnabled(false);
         presentacionguardarTodoButton.setEnabled(false);
-
+        controller.llenarComboBoxUnidades(PresentacionUnidadComboBox);
 
         listadoCategoria.setModel(controller.getModelCategorias());
         listadoCategoria.addMouseListener(new MouseAdapter() {
@@ -262,7 +255,7 @@ public class InventarioView {
                 PresentacionUnidadTxtField.setText("");
                 PresentacionIDTxtField.setText("");
                 PresentacioncapacidadCantidadTxtField.setText("");
-                PresentacionBuscarUnidadTxtField.setText("");
+                //PresentacionBuscarUnidadTxtField.setText("");
                 PresentacionIDBuscarTxtField.setText("");
             }
         });
@@ -773,11 +766,30 @@ public class InventarioView {
                 }
             }
         });
+
+
+        /*PresentacionUnidadComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Unidad selectedUnidad = (Unidad) PresentacionUnidadComboBox.getSelectedItem();
+
+                // Verificar que se ha seleccionado una categoría
+                if (selectedUnidad != null) {
+                    // Mostrar el código de la categoría en el TextField
+                    IDCattextField.setText(selectedCategoria.getCodigo());
+                    System.out.println("Categoría seleccionada: " + selectedCategoria.toString() + ", Código: " + selectedCategoria.getCodigo());
+                }
+            }
+        });*/
+
         PresentacionBuscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (PresentacionIDBuscarTxtField.getText().isEmpty() && PresentacionBuscarUnidadTxtField.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Debe Ingresar un código o una unidad para buscar");
+                Unidad selectedUnidad = (Unidad) PresentacionUnidadComboBox.getSelectedItem();
+
+
+                if (PresentacionIDBuscarTxtField.getText().isEmpty() && selectedUnidad == null) {
+                    JOptionPane.showMessageDialog(null, "Debe Ingresar un código o escoger unidad para buscar");
                     List<Presentacion> presentaciones = controller.actualizarTablaPesentacion(ArticuloCategoriaTxtField.getText(),
                             ArticuloSubCategoriaTxtField.getText(), ArticuloCodigoTxtField.getText());
                     PresentacionTableModel modeloTabla = (PresentacionTableModel) listadoPresentacionesPanel.getModel();
@@ -788,17 +800,17 @@ public class InventarioView {
                 }
                 List<Presentacion> presentaciones = new ArrayList<>();
                 try {
-                    if (!PresentacionIDBuscarTxtField.getText().isEmpty()) {
+                    if (selectedUnidad != null) {
                         presentaciones.addAll(controller.presentacionesEncontradasConIDIDAIDCIDSC(ArticuloCodigoTxtField.getText(),
                                 ArticuloCategoriaTxtField.getText(),
                                 ArticuloSubCategoriaTxtField.getText(),
                                 PresentacionIDBuscarTxtField.getText()));
                     }
 
-                    if (!PresentacionBuscarUnidadTxtField.getText().isEmpty()) {
+                    if (selectedUnidad != null) {
                         presentaciones.addAll(controller.presentacionesEncontradasConUnidadIDAIDCIDSC(ArticuloCodigoTxtField.getText(),
                                 ArticuloCategoriaTxtField.getText(),
-                                ArticuloSubCategoriaTxtField.getText(), PresentacionBuscarUnidadTxtField.getText()));
+                                ArticuloSubCategoriaTxtField.getText(), String.valueOf(selectedUnidad)));
                     }
 
                     if (presentaciones.isEmpty()) {
@@ -854,7 +866,7 @@ public class InventarioView {
         PresentacionIDBuscarTxtField.setEnabled(false);
         PresentacionBuscarUnidadLabel.setEnabled(false);
         PresentacionIDBuscarLabel.setEnabled(false);
-        PresentacionBuscarUnidadTxtField.setEnabled(false);
+        PresentacionUnidadComboBox.setEnabled(false);
         PresentacionIDLabel.setEnabled(false);
         listadoPresentacionesPanel.setModel(new DefaultTableModel());
     }
@@ -874,7 +886,7 @@ public class InventarioView {
         PresentacionIDLabel.setEnabled(true);
         PresentacionBuscarUnidadLabel.setEnabled(true);
         PresentacionIDBuscarLabel.setEnabled(true);
-        PresentacionBuscarUnidadTxtField.setEnabled(true);
+        PresentacionUnidadComboBox.setEnabled(true);
         presentacionguardarTodoButton.setEnabled(true);
     }
 
