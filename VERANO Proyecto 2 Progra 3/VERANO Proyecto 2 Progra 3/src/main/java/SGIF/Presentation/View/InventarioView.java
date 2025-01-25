@@ -779,7 +779,7 @@ public class InventarioView {
         PresentacionBuscarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Unidad selectedUnidad = (Unidad) PresentacionUnidadComboBox.getSelectedItem();
+                String selectedUnidad = (String) PresentacionUnidadComboBox.getSelectedItem();
 
 
                 if (PresentacionIDBuscarTxtField.getText().isEmpty() && selectedUnidad == null) {

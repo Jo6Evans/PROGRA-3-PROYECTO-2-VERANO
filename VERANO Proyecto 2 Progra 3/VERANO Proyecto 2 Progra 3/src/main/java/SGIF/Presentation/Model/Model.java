@@ -66,11 +66,11 @@ public class Model {
 
     }
 
-    public void setUnidades(List<Unidad> unidades) {
+    public void setUnidades(List<String> unidades) {
         data.setUnidades(unidades);
     }
 
-    public List<Unidad> getUnidades() {
+    public List<String> getUnidades() {
         return data.getUnidades();
     }
 

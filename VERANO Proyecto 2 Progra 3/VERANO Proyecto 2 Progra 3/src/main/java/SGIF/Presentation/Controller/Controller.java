@@ -176,10 +176,10 @@ public class Controller {
     //UNIDADES COMBOBOX
 
 
-    public void llenarComboBoxUnidades(JComboBox<Unidad> comboBox) {
-        List<Unidad> unidades = model.getUnidades();
+    public void llenarComboBoxUnidades(JComboBox<String> comboBox) {
+        List<String> unidades = model.getUnidades();
         comboBox.removeAllItems();
-        for (Unidad unidad : unidades) {
+        for (String unidad : unidades) {
             comboBox.addItem(unidad);
         }
     }

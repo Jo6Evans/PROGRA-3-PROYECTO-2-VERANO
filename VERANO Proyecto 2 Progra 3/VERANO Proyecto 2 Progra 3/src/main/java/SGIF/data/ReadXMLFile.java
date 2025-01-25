@@ -115,7 +115,7 @@ public class ReadXMLFile {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             // initialize StreamResult with File object to save to file
-            StreamResult result = new StreamResult(new File("VERANO Proyecto 2 Progra 3/inventario.xml"));
+            StreamResult result = new StreamResult(new File("inventario.xml"));
             DOMSource source = new DOMSource(doc);
             transformer.transform(source, result);
         } catch (ParserConfigurationException | TransformerException ex) {
@@ -132,7 +132,7 @@ public class ReadXMLFile {
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true); //quiero que verifique que el xml solo tenga cosas del xml y que la estructura este sana, un doc correcto
             // parse XML file
             DocumentBuilder db = dbf.newDocumentBuilder(); //documento donde voy a trabajar para el builder, intenta trasnform xml a memoria
-            Document doc = db.parse(new File("VERANO Proyecto 2 Progra 3/inventario.xml")); //hace parseo de un doc, se le pasa la ruta del doc, parse para leer yy transformar, devuelve un documento listo
+            Document doc = db.parse(new File("inventario.xml")); //hace parseo de un doc, se le pasa la ruta del doc, parse para leer yy transformar, devuelve un documento listo
             // optional, but recommended
             // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize(); //chequea si estructura correcta ttodo estandar de un xml, normalizar y leer correctamente
@@ -196,15 +196,15 @@ public class ReadXMLFile {
         return l;
     }
 
-    public List<Unidad> cargarUnidades() {
-        List<Unidad> unidades = new ArrayList<>();
+    public List<String> cargarUnidades() {
+        List<String> unidades = new ArrayList<>();
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
         try {
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(new File("VERANO Proyecto 2 Progra 3/VERANO Proyecto 2 Progra 3/unidades.xml"));
+            Document doc = db.parse(new File("unidades.xml"));
             doc.getDocumentElement().normalize();
 
             NodeList nodeList = doc.getElementsByTagName("unidad");
@@ -214,9 +214,9 @@ public class ReadXMLFile {
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element elementoUnidad = (Element) node;
-                    String nombre = elementoUnidad.getTextContent().trim();
+                    String unidad = elementoUnidad.getTextContent().trim();
 
-                    Unidad unidad = new Unidad(nombre);
+                   // Unidad unidad = new Unidad(nombre);
                     unidades.add(unidad);
                 }
             }

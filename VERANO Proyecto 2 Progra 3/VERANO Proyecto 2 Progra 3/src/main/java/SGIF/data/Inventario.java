@@ -8,18 +8,18 @@ import java.util.List;
 public class Inventario {
 
     private List<Categoria> categorias;
-    private List<Unidad> unidades;
+    private List<String> unidades;
 
     public Inventario() {
         categorias = new ArrayList<>();
         unidades = new ArrayList<>();
     }
 
-    public void setUnidades(List<Unidad> unidades) {
+    public void setUnidades(List<String> unidades) {
         this.unidades = unidades;
     }
 
-    public List<Unidad> getUnidades() {
+    public List<String> getUnidades() {
         System.out.println();
         return unidades;
     }
