@@ -234,7 +234,12 @@
             <marca>4</marca>
             <nombre>5</nombre>
             <Descripcion>5666</Descripcion>
-            <presentaciones/>
+            <presentaciones>
+              <presentacion id="3">
+                <unidad>Metro</unidad>
+                <cantidad>7</cantidad>
+              </presentacion>
+            </presentaciones>
           </articulo>
           <articulo ID="2">
             <marca>3</marca>
@@ -248,6 +253,10 @@
               <presentacion id="6">
                 <unidad>Mililitro</unidad>
                 <cantidad>778888</cantidad>
+              </presentacion>
+              <presentacion id="3">
+                <unidad>Kilo</unidad>
+                <cantidad>89</cantidad>
               </presentacion>
             </presentaciones>
           </articulo>

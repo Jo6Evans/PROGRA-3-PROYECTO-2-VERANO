@@ -9,6 +9,7 @@ import SGIF.logic.*;
 
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -83,7 +84,6 @@ public class InventarioView {
     private JPanel SubCategoriaPanel;
     private JPanel ArticuloPanel;
     private JLabel PresentacionUnidadLabel;
-    private JTextField PresentacionUnidadTxtField;
     private JButton categoriaEliminarButton;
     private JButton categoriaLimpiarButton;
     private JButton subCategoriaElminarButton;
@@ -375,7 +375,7 @@ public class InventarioView {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (ArticuloCodigoTxtField.getText().isEmpty() || PresentacionIDTxtField.getText().isEmpty() ||
-                            PresentacionUnidadTxtField.getText().isEmpty() || PresentacioncapacidadCantidadTxtField.getText().isEmpty()) {
+                             PresentacioncapacidadCantidadTxtField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Ingrese los campos marcados en rojo");
                         ArticulocodigoLabel.setForeground(Color.RED);
                         PresentacionIDLabel.setForeground(Color.RED);
@@ -387,7 +387,7 @@ public class InventarioView {
                     String idSubCategoria = ArticuloSubCategoriaTxtField.getText();
                     String idArticulo = ArticuloCodigoTxtField.getText();
                     String idPresentacion = PresentacionIDTxtField.getText();
-                    String unidadPresentacion = PresentacionUnidadTxtField.getText();
+                    String unidadPresentacion = PresentacionUnidadComboBox.getSelectedItem().toString();
                     String cantidadPresentacion = PresentacioncapacidadCantidadTxtField.getText();
 
                     Categoria categoria = controller.obtenerCategoriaPorCodigo(idCategoria);
@@ -547,7 +547,7 @@ public class InventarioView {
                     listadoPresentacionesPanel.clearSelection();
 
                     PresentacionIDTxtField.setText("");
-                    PresentacionUnidadTxtField.setText("");
+                    PresentacionUnidadComboBox.setSelectedItem(0);
                     PresentacioncapacidadCantidadTxtField.setText("");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -649,7 +649,7 @@ public class InventarioView {
                     String idSubCate = SubCategoriacodigoTxtField.getText();
                     String idArt = ArticuloCodigoTxtField.getText();
                     String idPres = PresentacionIDTxtField.getText();
-                    String nuevaUnidad = PresentacionUnidadTxtField.getText();
+                    String nuevaUnidad = PresentacionUnidadComboBox.getSelectedItem().toString();
                     String nuevaCantidad = PresentacioncapacidadCantidadTxtField.getText();
 
                     Presentacion presentacion = controller.editarPresentacion(idCate, idSubCate, idArt, idPres, nuevaUnidad, nuevaCantidad);
@@ -780,46 +780,52 @@ public class InventarioView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedUnidad = (String) PresentacionUnidadComboBox.getSelectedItem();
+                PresentacionTableModel modeloTabla = (PresentacionTableModel) listadoPresentacionesPanel.getModel();
 
+                modeloTabla.setPresentaciones(Collections.emptyList());
+                listadoPresentacionesPanel.clearSelection();
 
-                if (PresentacionIDBuscarTxtField.getText().isEmpty() && selectedUnidad == null) {
-                    JOptionPane.showMessageDialog(null, "Debe Ingresar un código o escoger unidad para buscar");
-                    List<Presentacion> presentaciones = controller.actualizarTablaPesentacion(ArticuloCategoriaTxtField.getText(),
-                            ArticuloSubCategoriaTxtField.getText(), ArticuloCodigoTxtField.getText());
-                    PresentacionTableModel modeloTabla = (PresentacionTableModel) listadoPresentacionesPanel.getModel();
-                    modeloTabla.setPresentaciones(presentaciones); // Actualizar el modelo con todas las presentaciones
-                    listadoPresentacionesPanel.clearSelection();
-
-                    return;
-                }
                 List<Presentacion> presentaciones = new ArrayList<>();
                 try {
-                    if (selectedUnidad != null) {
-                        presentaciones.addAll(controller.presentacionesEncontradasConIDIDAIDCIDSC(ArticuloCodigoTxtField.getText(),
+                    if (PresentacionIDBuscarTxtField.getText().isEmpty()) {
+                        presentaciones = controller.actualizarTablaPesentacion(
                                 ArticuloCategoriaTxtField.getText(),
                                 ArticuloSubCategoriaTxtField.getText(),
-                                PresentacionIDBuscarTxtField.getText()));
-                    }
-
-                    if (selectedUnidad != null) {
-                        presentaciones.addAll(controller.presentacionesEncontradasConUnidadIDAIDCIDSC(ArticuloCodigoTxtField.getText(),
-                                ArticuloCategoriaTxtField.getText(),
-                                ArticuloSubCategoriaTxtField.getText(), String.valueOf(selectedUnidad)));
-                    }
-
-                    if (presentaciones.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "No se encontraron presentaciones con los criterios especificados.");
+                                ArticuloCodigoTxtField.getText()
+                        );
                     } else {
-                        PresentacionTableModel modeloTabla = (PresentacionTableModel) listadoPresentacionesPanel.getModel();
-                        modeloTabla.setPresentaciones(presentaciones);
-                        listadoPresentacionesPanel.clearSelection();
-                        System.out.println("presentaciones encontradas");
+                        if (!PresentacionIDBuscarTxtField.getText().isEmpty()) {
+                            presentaciones.addAll(controller.presentacionesEncontradasConIDIDAIDCIDSC(
+                                    ArticuloCodigoTxtField.getText(),
+                                    ArticuloCategoriaTxtField.getText(),
+                                    ArticuloSubCategoriaTxtField.getText(),
+                                    PresentacionIDBuscarTxtField.getText()
+                            ));
+                        }
+
+                        if (presentaciones.isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "No se encontraron presentaciones con los criterios especificados. Mostrando todos los resultados.");
+                            presentaciones = controller.actualizarTablaPesentacion(
+                                    ArticuloCategoriaTxtField.getText(),
+                                    ArticuloSubCategoriaTxtField.getText(),
+                                    ArticuloCodigoTxtField.getText()
+                            );
+                        }
+                    }
+
+                    modeloTabla.setPresentaciones(presentaciones);
+                    listadoPresentacionesPanel.clearSelection();
+
+                    if (!presentaciones.isEmpty()) {
+                        System.out.println("Presentaciones encontradas: " + presentaciones.size());
                     }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Error al realizar la búsqueda: " + ex.getMessage());
                 }
             }
         });
+
+
     }
 
     //----------------------------------------------------------------
