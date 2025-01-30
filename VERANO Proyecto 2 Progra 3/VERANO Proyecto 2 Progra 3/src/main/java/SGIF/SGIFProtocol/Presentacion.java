@@ -1,6 +1,8 @@
 package SGIF.SGIFProtocol;
 
-public class Presentacion {
+import java.io.Serializable;
+
+public class Presentacion implements Serializable {
     String id;
     String unidad;
     String cantidad;

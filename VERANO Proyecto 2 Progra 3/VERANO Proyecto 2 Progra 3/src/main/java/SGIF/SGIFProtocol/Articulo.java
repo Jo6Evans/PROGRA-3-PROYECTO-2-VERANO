@@ -1,9 +1,10 @@
 package SGIF.SGIFProtocol;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Articulo {
+public class Articulo implements Serializable {
     String id;
     String marca;
     String nombre;

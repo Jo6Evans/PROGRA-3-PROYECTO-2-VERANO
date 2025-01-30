@@ -1,0 +1,17 @@
+<Usuarios>
+	<usuario>
+	 <id>JohnDoe</id>
+	 <password>MyP455W04D</password>
+	 <estado>true</estado>
+	</usuario>
+	<usuario>
+	 <id>JaneDoe</id>
+	 <password>qiAqv547Q#$</password>
+	 <estado>false</estado>
+	</usuario>
+	<usuario>
+	 <id>JuanPerez</id>
+	 <password>AnyPassword</password>
+	 <estado>true</estado>
+	</usuario>
+</Usuarios>

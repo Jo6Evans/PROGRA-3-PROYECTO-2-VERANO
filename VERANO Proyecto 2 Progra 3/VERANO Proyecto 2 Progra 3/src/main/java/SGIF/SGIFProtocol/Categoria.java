@@ -1,9 +1,10 @@
 package SGIF.SGIFProtocol;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Categoria {
+public class Categoria implements Serializable {
     String ID;
     String nombre;
     String descripcion;
