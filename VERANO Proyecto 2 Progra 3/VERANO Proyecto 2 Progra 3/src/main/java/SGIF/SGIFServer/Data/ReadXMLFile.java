@@ -1,9 +1,6 @@
 package SGIF.SGIFServer.Data;
 
-import SGIF.SGIFProtocol.Articulo;
-import SGIF.SGIFProtocol.Categoria;
-import SGIF.SGIFProtocol.Presentacion;
-import SGIF.SGIFProtocol.SubCategoria;
+import SGIF.SGIFProtocol.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -118,7 +115,7 @@ public class ReadXMLFile {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             // initialize StreamResult with File object to save to file
-            StreamResult result = new StreamResult(new File("VERANO Proyecto 2 Progra 3/VERANO Proyecto 2 Progra 3/inventario.xml"));
+            StreamResult result = new StreamResult(new File("inventario.xml"));
             DOMSource source = new DOMSource(doc);
             transformer.transform(source, result);
         } catch (ParserConfigurationException | TransformerException ex) {
@@ -135,7 +132,7 @@ public class ReadXMLFile {
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true); //quiero que verifique que el xml solo tenga cosas del xml y que la estructura este sana, un doc correcto
             // parse XML file
             DocumentBuilder db = dbf.newDocumentBuilder(); //documento donde voy a trabajar para el builder, intenta trasnform xml a memoria
-            Document doc = db.parse(new File("VERANO Proyecto 2 Progra 3/VERANO Proyecto 2 Progra 3/inventario.xml")); //hace parseo de un doc, se le pasa la ruta del doc, parse para leer yy transformar, devuelve un documento listo
+            Document doc = db.parse(new File("inventario.xml")); //hace parseo de un doc, se le pasa la ruta del doc, parse para leer yy transformar, devuelve un documento listo
             // optional, but recommended
             // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
             doc.getDocumentElement().normalize(); //chequea si estructura correcta ttodo estandar de un xml, normalizar y leer correctamente
@@ -207,7 +204,7 @@ public class ReadXMLFile {
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(new File("VERANO Proyecto 2 Progra 3/VERANO Proyecto 2 Progra 3/unidades.xml"));
+            Document doc = db.parse(new File("unidades.xml"));
             doc.getDocumentElement().normalize();
 
             NodeList nodeList = doc.getElementsByTagName("unidad");
@@ -227,6 +224,41 @@ public class ReadXMLFile {
             e.printStackTrace();
         }
         return unidades;
+    }
+
+    public List<Usuario> cargarUsuarios() {
+        List<Usuario> usuarios = new ArrayList<>();
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+        try {
+            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(new File("VERANO Proyecto 2 Progra 3/VERANO Proyecto 2 Progra 3/usuarios.xml"));
+            doc.getDocumentElement().normalize();
+
+            NodeList nodeList = doc.getElementsByTagName("usuario");
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element elementoUsuario = (Element) node;
+                    String id = elementoUsuario.getElementsByTagName("id").item(0).getTextContent().trim();
+                    String password = elementoUsuario.getElementsByTagName("password").item(0).getTextContent().trim();
+                    String estado = elementoUsuario.getElementsByTagName("estado").item(0).getTextContent().trim();
+
+                    // Convertir el estado de String a booleano
+                    boolean estaActivo = Boolean.parseBoolean(estado);
+
+                    Usuario usuario = new Usuario(id,password,estaActivo);
+                    usuarios.add(usuario);
+                }
+            }
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
+        }
+        return usuarios;
     }
 
 }

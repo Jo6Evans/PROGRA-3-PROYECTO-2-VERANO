@@ -2,6 +2,7 @@ package SGIF.SGIFCliente.Presentation.Controller;
 
 import SGIF.SGIFCliente.Presentation.Model.*;
 import SGIF.SGIFCliente.Presentation.View.InventarioView;
+import SGIF.SGIFCliente.logic.ServiceProxy;
 import SGIF.SGIFProtocol.Articulo;
 import SGIF.SGIFProtocol.Categoria;
 import SGIF.SGIFProtocol.Presentacion;
@@ -12,15 +13,20 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
+///Solo agregue al final la parte de login o handle login para comunicar el view con el serviceProxy
 
 public class Controller {
 
     private Model model;
     private InventarioView view;
+    private ServiceProxy localService;
+
 
     public Controller() {
         model = new Model();
         model.cargarArchivo();
+        //Service
+        localService = (ServiceProxy) ServiceProxy.instance();
     }
 
     public Model getModel() {
@@ -185,5 +191,119 @@ public class Controller {
         }
     }
     //============================================================================================================
+//USUARIOS
+
+    public void deliverPedido(String pedido) {
+        System.out.println( "Lista de pedidos");
+    }
+
+    ///eso de SwingWorker es un hilo aparte del original digamos hace que el login se haga aparte asi
+    /// no molesta el otro hilo, si le quitamos eso se congela la pagina...
+
+
+    public boolean handleLogin(String nombre, String password) {
+        new SwingWorker<Boolean, Void>() {
+            @Override
+            protected Boolean doInBackground() throws Exception {
+                if( ServiceProxy.instance().Login(nombre, password)){
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    boolean resultado = get(); // Obtiene el resultado de doInBackground()
+                    if (resultado) {
+                        // Si el inicio de sesión fue exitoso, puedes realizar alguna acción
+                        System.out.println("Login exitoso para el usuario: " + nombre);
+                    } else {
+                        // Si las credenciales son incorrectas, puedes manejarlo internamente
+                        System.out.println("Login fallido para el usuario: " + nombre);
+                    }
+                } catch (Exception ex) {
+                    // Si ocurre una excepción, puedes manejarla internamente
+                    ex.printStackTrace();
+                    System.err.println("Error durante el login: " + ex.getMessage());
+                }
+            }
+        }.execute();
+        return false;
+    }
+
+///Tengo muchos metodos handle porque no se como hacer que funcionen jaja
+   /* public boolean handleLogin(String nombre, String password) {
+        new SwingWorker<Boolean, Void>() {
+            @Override
+            protected Boolean doInBackground() throws Exception {
+                // Llama al metodo Login del ServiceProxy en un hilo separado
+                return ServiceProxy.instance().Login(nombre, password); // Retorna true si el login es exitoso
+            }
+        }.execute();
+        return false;
+    }*/
+
+    /*public boolean handleLogin(String nombre, String password) throws Exception {
+        boolean resultado = false;
+        if( ServiceProxy.instance().Login(nombre, password)){
+            resultado = true;
+        }
+        return resultado;
+    }*/
+
+/*
+Sirve para notificar, es una mouseherramienta que usaremos mas tarde
+            @Override
+            protected void done() {
+                try {
+                    boolean loginExitoso = get(); // Obtiene el resultado de doInBackground()
+                    if (loginExitoso) {
+                        // Si el inicio de sesión fue exitoso, puedes realizar alguna acción interna
+                        System.out.println("Login exitoso para el usuario: " + nombre);
+                    } else {
+                        // Si las credenciales son incorrectas, puedes manejarlo internamente
+                        System.out.println("Login fallido para el usuario: " + nombre);
+                    }
+                } catch (Exception ex) {
+                    // Si ocurre una excepción, puedes manejarla internamente
+                    ex.printStackTrace();
+                    System.err.println("Error durante el login: " + ex.getMessage());
+                }
+            }
+   * /
+
+    /*public void handleLogin(String nombre, String password) {
+        new SwingWorker<Boolean, Void>() {
+            @Override
+            protected Boolean doInBackground() throws Exception {
+                // Llama al metodo Login del ServiceProxy en un hilo separado
+                Usuario usuario = ServiceProxy.instance().Login(nombre, password);
+                return usuario != null; // Retorna true si el usuario no es null
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    boolean loginExitoso = get(); // Obtiene el resultado de doInBackground()
+                    if (loginExitoso) {
+                        // Si el inicio de sesión fue exitoso, notifica a la vista
+                        SwingUtilities.invokeLater(() -> view.showTabbedPane());
+                    } else {
+                        // Si las credenciales son incorrectas, muestra un mensaje de error
+                        SwingUtilities.invokeLater(() ->
+                                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE)
+                        );
+                    }
+                } catch (Exception ex) {
+                    // Si ocurre una excepción, muestra el mensaje de error
+                    ex.printStackTrace();
+                    SwingUtilities.invokeLater(() ->
+                            JOptionPane.showMessageDialog(null, "Error de conexión con el servidor", "Error", JOptionPane.ERROR_MESSAGE)
+                    );
+                }
+            }
+        }.execute();
+    }*/
 
 }

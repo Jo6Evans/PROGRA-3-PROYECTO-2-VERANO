@@ -1,9 +1,6 @@
 package SGIF.SGIFServer.Data;
 
-import SGIF.SGIFProtocol.Articulo;
-import SGIF.SGIFProtocol.Categoria;
-import SGIF.SGIFProtocol.Presentacion;
-import SGIF.SGIFProtocol.SubCategoria;
+import SGIF.SGIFProtocol.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +9,12 @@ public class Inventario {
 
     private List<Categoria> categorias;
     private List<String> unidades;
+    private List<Usuario> usuarios;
 
     public Inventario() {
         categorias = new ArrayList<>();
         unidades = new ArrayList<>();
+        usuarios = new ArrayList<>();
     }
 
     public void setUnidades(List<String> unidades) {
@@ -31,6 +30,7 @@ public class Inventario {
         ReadXMLFile xmlPersistent = new ReadXMLFile();
         categorias = xmlPersistent.cargarCategorias();
         unidades = xmlPersistent.cargarUnidades();
+        usuarios = xmlPersistent.cargarUsuarios();
     }
 
     private boolean categoriaExiste(String codigo) {
@@ -55,6 +55,15 @@ public class Inventario {
             e.printStackTrace();
         }
 
+    }
+
+    //Usuario
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> users) {
+        this.usuarios = users;
     }
 
     //=================================================================================================================

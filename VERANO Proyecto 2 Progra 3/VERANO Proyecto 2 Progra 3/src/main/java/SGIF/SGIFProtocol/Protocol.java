@@ -6,7 +6,8 @@ public class Protocol {
 
     public static final int LOGIN = 1;
     public static final int LOGOUT = 2;
-    public static final int ENVIAR = 100;
+    public static final int POST=3;
+    public static final int DELIVER = 100;
 
     public static final int NO_ERROR = 0;
     public static final int ERROR_LOGIN = 4;

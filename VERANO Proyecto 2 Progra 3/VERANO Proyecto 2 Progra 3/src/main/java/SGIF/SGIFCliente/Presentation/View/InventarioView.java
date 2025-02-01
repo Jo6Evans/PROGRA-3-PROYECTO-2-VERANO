@@ -19,6 +19,12 @@ import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+///Agregue una parte que dice LOGIN y se intenta la misma idea que el proyecto CHAT
+/// para hacer aparecer el panel lOGIN y despues el Tabbedpane pero no se logra
+/// El problema es que ya en el momento de ingresar o se congela o sale el error de que no se conecto
+/// aunque en la consola sale que el server si se conecto alguien pero no funciona
+
+
 public class InventarioView {
 
     private JTabbedPane tabbedPane;
@@ -109,11 +115,20 @@ public class InventarioView {
     private JTextField PresentacionBuscarUnidadTxtField;
     private JComboBox PresentacionUnidadComboBox;
 
+    //LOGIN
+    private JPanel loginPanel;
+    private JTextField nombreLogintextField;
+    private JButton loginButton;
+    private JPasswordField passwordField1;
+
     private Controller controller;
 
     public InventarioView() {
 
         controller = new Controller();
+        loginPanel.setVisible(true);
+        tabbedPane.setVisible(false);
+
         SubCategoriacategoriaTxtField.setEnabled(false);
         ArticuloCategoriaTxtField.setEnabled(false);
         ArticuloSubCategoriaTxtField.setEnabled(false);
@@ -829,7 +844,39 @@ public class InventarioView {
         });
 
 
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String nombre = nombreLogintextField.getText().trim(); // Obtener el login
+                String password = new String(passwordField1.getPassword()); // Obtener la contraseña
+
+                if (nombre.isEmpty() || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Ingrese su usuario y el password.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Llamar al Controller para manejar el login
+                try {
+                    if ( controller.handleLogin(nombre, password) ) {
+                        loginPanel.setVisible(false);
+                        tabbedPane.setVisible(true);
+                    }
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }
+        });
+
     }
+/*
+    public void showTabbedPane() {
+        // Ocultar el loginPanel y mostrar el tabbedPane
+        loginPanel.setVisible(false);
+        System.out.println("Cambio de poanel=============");
+        tabbedPane.setVisible(true);
+    }*/
 
     //----------------------------------------------------------------
     //para llenar los campos de texto con la info
