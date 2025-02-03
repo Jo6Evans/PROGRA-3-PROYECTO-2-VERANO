@@ -1,9 +1,9 @@
 package SGIF.SGIFServer;
 
 import SGIF.SGIFProtocol.*;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.io.IOException;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class Worker {
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private IService service;
-    private Usuario Usuario;
+    private Usuario usuario; //esto hay problema porque no se inicializa entonces nunca va a pasar de la ventana del login
     private boolean continuar;
 
     /* public Worker(Server srv, ObjectInputStream in, ObjectOutputStream out, Usuario Usuario, IService service) {
@@ -32,15 +32,15 @@ public class Worker {
         this.out = out;
         this.service = service;
     }
-    public void start() {
-        System.out.println("Worker iniciado para " + Usuario.getNombre());
+    public void start() { //esto y todos los que digan "usuario." da error porque nunca se inicializa el usuario y se cae
+        System.out.println("Worker iniciado para " + usuario.getNombre());
         continuar = true;
         new Thread(this::listen).start();
     }
 
     public void stop() {
         continuar = false;
-        System.out.println("Conexión cerrada para " + Usuario.getNombre());
+        System.out.println("Conexión cerrada para " + usuario.getNombre());
     }
 
     public void listen() {
@@ -99,14 +99,14 @@ public class Worker {
     }*/
 
     private void handleLogout() {
-        srv.remove(Usuario);
+        srv.remove(usuario);
         stop();
     }
 
     private void handlePost() {
         try {
             List<String> messages = (List<String>) in.readObject();
-            System.out.println(Usuario.getNombre() + " envió mensajes: " + messages);
+            System.out.println(usuario.getNombre() + " envió mensajes: " + messages);
             srv.deliver(messages);
         } catch (Exception e) {
             System.out.println("Error al manejar POST: " + e.getMessage());
@@ -124,7 +124,7 @@ public class Worker {
     }
 
     public Usuario getUsuario() {
-        return Usuario;
+        return usuario;
     }
 }
     /*private Server srv;

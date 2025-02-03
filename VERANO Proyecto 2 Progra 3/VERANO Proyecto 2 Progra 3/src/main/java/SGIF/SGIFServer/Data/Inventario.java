@@ -59,7 +59,7 @@ public class Inventario {
 
     //Usuario
     public List<Usuario> getUsuarios() {
-        return usuarios;
+        return this.usuarios;
     }
 
     public void setUsuarios(List<Usuario> users) {

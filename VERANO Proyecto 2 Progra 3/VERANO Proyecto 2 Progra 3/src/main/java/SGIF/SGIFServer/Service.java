@@ -9,23 +9,26 @@ import java.util.List;
 
 public class Service  implements IService {
     private Inventario data;
-    private List<Usuario> usuario;
 
-
+    //el data hay que inicializarlo cargando la lista de usuarios por eso tampoco pasaba nada
     public Service() {
         data =  new Inventario();
+        data.LoadXML();
     }
-    public boolean Login(String nombre, String password) throws Exception {
+    //esto si sirve verificando que ocurre, hay que ocntrolar los falsos y trues en el controller y view para mensajes de info o error y asi
+    public boolean Login(String nombre, String password){
         for (Usuario u : data.getUsuarios()) {
             if (u.getNombre().equals(nombre) && u.getContrasena().equals(password)) {
                 if (!u.estaActivo()) {
-                    throw new Exception("El usuario está bloqueado, no tiene acceso.");
+                    System.out.println("El usuario está bloqueado, no tiene acceso.");
+                    return false;
                 }
                 System.out.println("El usuario se autenticó correctamente.");
                 return true;
             }
         }
-        throw new Exception("Usuario no encontrado.");
+        System.out.println("Usuario no encontrado.");
+        return false;
     }
 
     /*public Usuario Login(String nombre, String password) throws Exception {

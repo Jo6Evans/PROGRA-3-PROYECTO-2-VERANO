@@ -63,8 +63,9 @@ public class ServiceProxy implements IService {
             out.writeUTF(nombre); // Enviar nombre de usuario
             out.writeUTF(password); // Enviar contraseña
             out.flush();
-
+            System.out.println("antes del readint");
             int response = in.readInt();
+            System.out.println(response);
             if (response == Protocol.NO_ERROR) {
                 boolean loginSuccess = in.readBoolean(); // Recibir el booleano desde el servidor
                 this.start();

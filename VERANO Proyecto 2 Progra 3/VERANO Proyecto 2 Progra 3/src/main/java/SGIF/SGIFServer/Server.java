@@ -42,7 +42,9 @@ public class Server {
                 System.out.println("Cliente conectado desde " + socket.getInetAddress());
 
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+                //String nombre = in.readUTF();
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+                //String password = in.readUTF();
 
                 // Verificar el login (ahora devuelve un booleano)
                 boolean loginSuccess = this.Login(in, out, service);
